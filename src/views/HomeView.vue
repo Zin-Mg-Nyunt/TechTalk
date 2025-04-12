@@ -1,9 +1,11 @@
 <template>
-  <h1>hello</h1>
+  <HeroSection></HeroSection>
 </template>
 
 <script>
+import HeroSection from '../components/HeroSection'
 export default {
+  components: { HeroSection },
 
 }
 </script>

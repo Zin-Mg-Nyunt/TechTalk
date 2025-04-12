@@ -1,5 +1,16 @@
 <template>
-  
+  <div class=" flex flex-col md:flex-row justify-between items-center gap-x-10 md:py-10">
+    <div class="px-[50px] sm:px-0  md:w-[400px] lg:w-[500px] xl:w-[700px] 2xl:w-[700px] h-[300px] md:h-auto flex items-center md:inline-block">
+        <p class=" text-slate-100 text-lg 2xl:text-xl 2xl:leading-8">
+            <span class=" text-sky-400">
+                Welcome to TechTalks    
+            </span> — a simple blog where you can explore and share ideas about technology. Whether you're learning to code, staying updated on trends, or just love tech, this is the place for you. Easy to read, easy to write — tech made friendly."
+        </p>
+    </div>
+    <div class="px-[50px] sm:px-0  md:w-[400px] lg:w-[500px] ">
+        <img src="../assets/images/heroSection.png" alt="" class="w-full sm:w-[80%]">
+    </div>
+  </div>
 </template>
 
 <script>
