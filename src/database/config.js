@@ -9,7 +9,7 @@ const firebaseConfig = {
     storageBucket: "techtalk-blog-b0492.firebasestorage.app",
     messagingSenderId: "242617726261",
     appId: "1:242617726261:web:1f72528293d196f2c4087c"
-};
+  };
   
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

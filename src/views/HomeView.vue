@@ -1,11 +1,16 @@
 <template>
   <HeroSection></HeroSection>
+  <BlogSection></BlogSection>
 </template>
 
 <script>
+import BlogSection from '../components/BlogSection'
+import BlogList from '../components/BlogList'
 import HeroSection from '../components/HeroSection'
 export default {
-  components: { HeroSection },
+  components: {
+    BlogSection,
+    BlogList, HeroSection },
 
 }
 </script>
