@@ -5,10 +5,10 @@
     <form @submit.prevent="submitBlog" class="space-y-6 p-5 text-slate-100">
 
       <!-- Thumbnail Upload -->
-      <div>
+      <!-- <div>
         <label class="block font-semibold">Thumbnail Image</label>
         <input type="file" @change="handleFileChange" class="w-full cursor-pointer" accept="image/*" />
-      </div>
+      </div> -->
 
       <!-- Title -->
       <div>
@@ -46,6 +46,10 @@
 import Quill from "quill";
 import 'quill/dist/quill.snow.css';
 import { nextTick, onMounted, ref } from 'vue';
+import { getDownloadURL, ref as storageRef, uploadBytes } from "firebase/storage";
+import { storage } from '@/database/config';
+import { serverTimestamp } from 'firebase/firestore';
+import addBlog from "../composable/addBlog";
 
 export default {
     setup(){
@@ -55,9 +59,18 @@ export default {
         const quillEditor = ref(null)
         let quillInstance = null
 
-        const handleFileChange = (e) => {
-            thumbnail.value = e.target.files[0]
-        }
+        // default blog image url
+        let imageUrl = "https://kickervideo.com/wp-content/themes/kickervideoTheme/images/blog_default.png";
+
+        const tagsArray = tagsInput.value.split(',').map(tag => tag.trim())
+        // blog creater can't put twice same tag
+        const uniqueTagsArray=tagsArray.filter((tag,index,array)=>{ 
+            return array.indexOf(tag) === index
+        })
+
+        // const handleFileChange = (e)=>{
+        //     console.log(e.target.files[0])
+        // }
 
         onMounted( async() => {
             await nextTick() // wait until DOM is fully rendered
@@ -83,34 +96,41 @@ export default {
 
         const submitBlog = async () => {
             const content = quillInstance.root.innerHTML // collect blog content
-            const tagsArray = tagsInput.value.split(',').map(tag => tag.trim())
 
-            // blog creater can't put twice same tag
-            const uniqueTagsArray=tagsArray.filter((tag,index,array)=>{ 
-                return array.indexOf(tag) === index
-            })
+            // image upload to firebase
+            // if (thumbnail.value) {
+            //     // create path to save image
+            //     const path = storageRef(storage,`thumbnails/${Date.now()}-${thumbnail.value.name}`);
+            //     // upload image to this path from firebase storage
+            //     const uploadImage = await uploadBytes(path,thumbnail.value);
+            //     // create publicUrl with getDownloadURL
+            //     imageUrl= await getDownloadURL(uploadImage.ref)
+            // }
 
             const blogData = {
                 title: title.value,
                 content,
                 tags: uniqueTagsArray,
-                created_at: new Date(),
-                thumbnail: thumbnail.value, // Replace after upload
+                created_at: serverTimestamp(),
+                thumbnail: imageUrl,
                 likes: 0,
                 saves: 0
             }
 
             // Here you can upload image to Firebase Storage and then save blog to Firestore
+            let {error,saveBlog}=addBlog('blogs');
+            await saveBlog(blogData)
+            alert("Blog created successfully!")
 
-
-            title.value="",
-            tagsInput.value="",
-            quillEditor.value=null
-            console.log('Blog Data Ready to Save:', blogData)
+            // reset form
+            title.value = "",
+            tagsInput.value = "",
+            quillInstance.root.innerHTML = ""
+            // thumbnail.value = null
         }
 
 
-        return {title, tagsInput, handleFileChange,quillEditor, submitBlog}
+        return {title, tagsInput,quillEditor, submitBlog}
     }
 }
 </script>

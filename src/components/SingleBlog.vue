@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-md mx-auto bg-transparent rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 border-sky-400 border-1 cursor-pointer">
-  <img class="w-full h-48 object-cover" :src="blog.thumbnaiUrl" alt="Blog thumbnail" />
+  <img class="w-full h-48 object-cover" :src="blog.thumbnail" alt="Blog thumbnail" />
   <div class="p-4">
     <h2 class="text-xl font-semibold text-slate-100 mb-2 line-clamp-2"> 
         {{blog.title}}
