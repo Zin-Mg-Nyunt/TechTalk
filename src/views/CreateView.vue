@@ -53,24 +53,21 @@ import addBlog from "../composable/addBlog";
 
 export default {
     setup(){
-        const title = ref('')
-        const tagsInput = ref('')
-        const thumbnail = ref(null)
-        const quillEditor = ref(null)
+        let title = ref('')
+        let tagsInput = ref('')
+        let thumbnail = ref(null)
+        let tagsArray =ref([])
+        let quillEditor = ref(null)
         let quillInstance = null
 
         // default blog image url
         let imageUrl = "https://kickervideo.com/wp-content/themes/kickervideoTheme/images/blog_default.png";
 
-        const tagsArray = tagsInput.value.split(',').map(tag => tag.trim())
-        // blog creater can't put twice same tag
-        const uniqueTagsArray=tagsArray.filter((tag,index,array)=>{ 
-            return array.indexOf(tag) === index
-        })
-
         // const handleFileChange = (e)=>{
         //     console.log(e.target.files[0])
         // }
+
+
 
         onMounted( async() => {
             await nextTick() // wait until DOM is fully rendered
@@ -94,8 +91,8 @@ export default {
             }
         })
 
-        const submitBlog = async () => {
-            const content = quillInstance.root.innerHTML // collect blog content
+        let submitBlog = async () => {
+            let content = quillInstance.root.innerHTML // collect blog content
 
             // image upload to firebase
             // if (thumbnail.value) {
@@ -106,6 +103,18 @@ export default {
             //     // create publicUrl with getDownloadURL
             //     imageUrl= await getDownloadURL(uploadImage.ref)
             // }
+
+            if (tagsInput.value.includes(',')) {
+                tagsArray.value = tagsInput.value.split(',').map(tag => tag.trim())
+            }else{
+                console.log("this is tagsArray -",tagsArray.value)
+
+            }
+            // blog creater can't put twice same tag
+            let uniqueTagsArray=tagsArray.value.filter((tag,index,array)=>{ 
+                return array.indexOf(tag) === index
+            })
+        
 
             const blogData = {
                 title: title.value,
@@ -126,7 +135,7 @@ export default {
             title.value = "",
             tagsInput.value = "",
             quillInstance.root.innerHTML = ""
-            // thumbnail.value = null
+            thumbnail.value = null
         }
 
 

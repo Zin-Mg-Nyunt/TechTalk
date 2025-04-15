@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import CreateView from '../views/CreateView.vue'
+import BlogDetail from '../views/BlogDetail.vue'
 
 const routes = [
   {
@@ -12,6 +13,12 @@ const routes = [
     path: '/create',
     name: 'create',
     component: CreateView
+  },
+  {
+    path: '/detail/:id',
+    name: 'blogDetail',
+    component: BlogDetail,
+    props:true
   }
 ]
 
