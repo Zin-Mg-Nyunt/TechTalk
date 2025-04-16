@@ -1,4 +1,5 @@
 <template>
+    <HeroSection></HeroSection>
       <div class="max-w-4xl mx-auto px-4 py-10" v-if="formattedBlog">
         <article class="bg-white shadow-md rounded-lg overflow-hidden">
         <!-- Thumbnail -->
@@ -29,16 +30,18 @@
 
 <script>
 
+import HeroSection from '../components/HeroSection'
 import getBlog from "../composable/getBlog";
 import { formatDistanceToNow } from "date-fns";
 import { onMounted, ref } from 'vue';
 
 export default {
+  components: { HeroSection },
     props:['id'],
     setup(props){
         let formattedBlog = ref(null)
         let {error,load,blog}=getBlog()
-        
+
         onMounted(async ()=>{
             await load(props.id); 
             let formattedDate = formatDistanceToNow(blog.value.created_at.toDate())

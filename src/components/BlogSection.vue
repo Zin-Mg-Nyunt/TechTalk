@@ -6,7 +6,11 @@
 <script>
 import BlogList from './BlogList'
 export default {
-  components: { BlogList },
+  components: {
+    BlogList },
+    setup(){
+
+    }
 
 }
 </script>

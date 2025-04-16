@@ -105,9 +105,9 @@ export default {
             // }
 
             if (tagsInput.value.includes(',')) {
-                tagsArray.value = tagsInput.value.split(',').map(tag => tag.trim())
+              tagsArray.value = tagsInput.value.split(',').map(tag => tag.trim())
             }else{
-                console.log("this is tagsArray -",tagsArray.value)
+              tagsArray.value.push(tagsInput.value);
 
             }
             // blog creater can't put twice same tag
