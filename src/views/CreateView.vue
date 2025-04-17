@@ -46,8 +46,6 @@
 import Quill from "quill";
 import 'quill/dist/quill.snow.css';
 import { nextTick, onMounted, ref } from 'vue';
-import { getDownloadURL, ref as storageRef, uploadBytes } from "firebase/storage";
-import { storage } from '@/database/config';
 import { serverTimestamp } from 'firebase/firestore';
 import addBlog from "../composable/addBlog";
 
@@ -111,9 +109,10 @@ export default {
 
             }
             // blog creater can't put twice same tag
-            let uniqueTagsArray=tagsArray.value.filter((tag,index,array)=>{ 
-                return array.indexOf(tag) === index
-            })
+            // let uniqueTagsArray=tagsArray.value.filter((tag,index,array)=>{ 
+            //     return array.indexOf(tag) === index
+            // })
+            let uniqueTagsArray=[...new Set(tagsArray.value)]
         
 
             const blogData = {
