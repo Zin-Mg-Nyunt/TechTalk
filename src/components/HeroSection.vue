@@ -7,9 +7,17 @@
             </span> — a simple blog where you can explore and share ideas about technology. Whether you're learning to code, staying updated on trends, or just love tech, this is the place for you. Easy to read, easy to write — tech made friendly."
         </p>
         <div v-if="notUser">
-            <button class="px-7 py-2 bg-sky-400 text-slate-100 m-5 rounded-lg cursor-pointer active:bg-sky-300">Login</button>
+            <button class="px-7 py-2 bg-sky-400 text-slate-100 m-5 rounded-lg cursor-pointer active:bg-sky-300">
+                <router-link :to="{name: 'authView', params:{status:'login'}}">
+                    Login
+                </router-link>
+            </button>
             <span class="text-slate-100">or</span>
-            <button class="px-7 py-2 bg-sky-400 text-slate-100 m-5 rounded-lg cursor-pointer active:bg-sky-300">Signup</button>
+            <button class="px-7 py-2 bg-sky-400 text-slate-100 m-5 rounded-lg cursor-pointer active:bg-sky-300">
+                <router-link :to="{name: 'authView', params:{status:'signup'}}">
+                    Signup
+                </router-link>
+            </button>
         </div>
     </div>
     <div class="px-[50px] sm:px-0  md:w-[400px] lg:w-[500px] ">

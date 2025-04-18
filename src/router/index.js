@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import CreateView from '../views/CreateView.vue'
 import BlogDetail from '../views/BlogDetail.vue'
 import TagView from '../views/TagView.vue'
+import AuthView from '../views/AuthView.vue'
 import NotFound from '../views/NotFound.vue'
 
 const routes = [
@@ -26,6 +27,12 @@ const routes = [
     path: '/tags/:tag',
     name: 'tagView',
     component: TagView,
+    props: true
+  },
+  {
+    path: '/auth/:status',
+    name: 'authView',
+    component: AuthView,
     props: true
   },
   {
