@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import CreateView from '../views/CreateView.vue'
 import BlogDetail from '../views/BlogDetail.vue'
 import TagView from '../views/TagView.vue'
+import NotFound from '../views/NotFound.vue'
 
 const routes = [
   {
@@ -26,6 +27,10 @@ const routes = [
     name: 'tagView',
     component: TagView,
     props: true
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    component: NotFound
   }
 ]
 

@@ -1,10 +1,10 @@
 <template>
    <div class="mt-10 text-center">
-    <span v-for="tag in uniqueTag" :key="tag" class="px-6 py-3 text-sm text-slate-100 bg-sky-400 mx-6 rounded-xl capitalize cursor-pointer tracking-wider">
+    <span v-for="tag in uniqueTag" :key="tag" class="px-6 py-3 text-sm text-slate-100 bg-sky-400 mx-6 rounded-xl capitalize cursor-pointer tracking-wider select-none active:bg-sky-600">
         <router-link :to="{name:'tagView',params:{tag}}">
             {{tag}}
         </router-link>
-    </span>
+    </span> 
    </div>
 </template>
 
