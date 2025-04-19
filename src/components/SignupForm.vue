@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { nextTick, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import useSignup from '../composable/useSignup'
 export default {

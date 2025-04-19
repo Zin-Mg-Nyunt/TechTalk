@@ -3,7 +3,7 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { ref } from "vue";
 import errorHandler from './errorHandler';
 
-let error = ref(null);
+let error = ref('');
 
 let signUp = async (email,password,userName) => {
     try {

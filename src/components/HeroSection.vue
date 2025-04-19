@@ -6,7 +6,7 @@
                 Welcome to TechTalks    
             </span> — a simple blog where you can explore and share ideas about technology. Whether you're learning to code, staying updated on trends, or just love tech, this is the place for you. Easy to read, easy to write — tech made friendly."
         </p>
-        <div v-if="notUser">
+        <div v-if="isGuest">
             <router-link :to="{name: 'authView', params:{status:'login'}}">
                 <button class="px-7 py-2 bg-sky-400 text-slate-100 m-5 rounded-lg cursor-pointer active:bg-sky-300">
                         Login
@@ -27,12 +27,22 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
+import { auth } from '@/database/config';
+import { onAuthStateChanged } from 'firebase/auth';
 export default {
     setup(){
-        let notUser = ref(true);
-
-        return {notUser}
+        let isGuest = ref(false);
+        onMounted(()=>{
+            onAuthStateChanged(auth,(user)=>{
+                if (user) {
+                    isGuest.value = false;
+                }else{
+                    isGuest.value = true;
+                }
+            })
+        })
+        return {isGuest}
     }
 }
 </script>
