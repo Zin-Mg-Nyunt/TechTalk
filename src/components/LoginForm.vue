@@ -2,7 +2,7 @@
     <!-- Login form -->
   <div class="min-h-screen flex items-center justify-center bg-slate-900 px-4">
     <div class="w-full max-w-md bg-slate-800 p-8 rounded-2xl shadow-lg">
-        <h2 class="text-2xl font-bold text-white mb-6 text-center">Login to Your Account</h2>
+        <h2 class="text-2xl font-bold text-white mb-6 text-center">Welcome back 🤩</h2>
         <form class="space-y-5" @submit.prevent="login">
         <div>
             <label class="block text-sm text-gray-300 mb-1">Email</label>
@@ -65,6 +65,7 @@ export default {
             }
             let user=await loginAcc(email.value,password.value);
             if (user) {
+                error.value = null;
                 router.push('/');
             }
 
