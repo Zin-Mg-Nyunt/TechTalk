@@ -1,9 +1,10 @@
 <template>
+  <NavBar></NavBar>
+  <HeroSection></HeroSection>
   <div v-if="error">
     {{error}}
   </div>
   <div v-if="blogs.length">
-    <HeroSection></HeroSection>
     <TagCloud :blogs="blogs"></TagCloud>
     <div class="grid grid-cols-3 gap-4 mt-20">
       <div v-for="blog in filteredBlogs" :key="blog.id">
@@ -14,6 +15,7 @@
 </template>
 
 <script>
+import NavBar from '../components/NavBar'
 import HeroSection from '../components/HeroSection'
 import TagCloud from '../components/TagCloud'
 import SingleBlog from '../components/SingleBlog'
@@ -22,6 +24,7 @@ import getBlogs from '@/composable/getBlogs'
 
 export default {
   components: {
+    NavBar,
     HeroSection,
     TagCloud, SingleBlog },
     props:['tag'],

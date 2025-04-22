@@ -1,4 +1,5 @@
 <template>
+  <NavBar></NavBar>
   <HeroSection></HeroSection>
   <div class="max-w-4xl mx-auto px-4 py-10" v-if="formattedBlog">
         <article class="bg-white shadow-md rounded-lg overflow-hidden">
@@ -31,12 +32,17 @@
             <!-- Rich content -->
             <div class="prose max-w-none prose-sm sm:prose lg:prose-lg prose-img:rounded" v-html="formattedBlog.content"></div>
         </div>
+        <div class="p-6">
+          <CommentSection></CommentSection>
+        </div>
         </article>
   </div>
 </template>
 
 <script>
 
+import CommentSection from '../components/CommentSection'
+import NavBar from '../components/NavBar'
 import HeroSection from '../components/HeroSection'
 import getBlog from "../composable/getBlog";
 import { formatDistanceToNow } from "date-fns";
@@ -46,7 +52,9 @@ import { db } from '@/database/config';
 import { useRouter } from 'vue-router';
 
 export default {
-  components: { HeroSection },
+  components: {
+    CommentSection,
+    NavBar, HeroSection },
     props:['id'],
     setup(props){
         let formattedBlog = ref(null)
